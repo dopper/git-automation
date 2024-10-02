@@ -2,6 +2,8 @@
 
 This tool provides a pre-commit hook for Git repositories to manage large files, compress them when necessary, and track them using Git LFS (Large File Storage). It also includes backup and revert functionalities to ensure data safety.
 
+![Your Logo](assets/git-lfs-automation.png)
+
 ## Features
 
 - Compresses large files (>50MB) automatically
