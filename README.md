@@ -19,33 +19,49 @@ This tool helps manage large files in Git repositories by automatically compress
 ## Installation
 1. Clone this repository or copy the `git_precommit_file_management.sh` script to your project's root directory.
 2. Make the script executable:
-    `chmod +x git_precommit_file_management.sh`
+``` bash
+chmod +x git_precommit_file_management.sh
+```
 
 ## Usage
 You can run the script manually in different modes:
 - **Default mode** (process files without additional options):
-    `./git_precommit_file_management.sh`
+```bash
+./git_precommit_file_management.sh
+```
 
 - **Backup mode**:
-    `./git_precommit_file_management.sh --backup`
+```bash
+./git_precommit_file_management.sh --backup
+```
 
 - **Stash mode**:
-    `./git_precommit_file_management.sh --stash`
+```bash
+./git_precommit_file_management.sh --stash
+```
 
 - **Dry-run mode**:
-    `./git_precommit_file_management.sh --dry-run`
+```bash
+./git_precommit_file_management.sh --dry-run
+```
 
 - **Revert mode**:
-    `./git_precommit_file_management.sh --revert`
+```bash
+./git_precommit_file_management.sh --revert
+```
 
 When run without arguments, the script will compress large files and track them with Git LFS as needed.
 ## Testing
 A test script `test_precommit_script.sh` is provided to verify the functionality. To run the tests:
 1. Make the test script executable:
-    `chmod +x test_precommit_script.sh`
+```bash
+chmod +x test_precommit_script.sh
+```
 
 2. Run the test script:
-    `./test_precommit_script.sh`
+```bash
+./test_precommit_script.sh
+```
 
 The test script creates a temporary Git repository, adds various types of files, and runs the script with different options to ensure everything works as expected.
 ## Customization
