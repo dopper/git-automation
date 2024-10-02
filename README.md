@@ -1,7 +1,7 @@
 # Git Pre-Commit File Management Tool
 This tool helps manage large files in Git repositories by automatically compressing them when necessary and tracking them with Git LFS (Large File Storage). It also includes backup and revert functionalities to ensure data safety.
 
-![Project Logo](assets/git-lfs-automation.png)
+<img src="assets/git-lfs-automation.png" alt="Project Logo" width="200"/>
 
 ## Features
 - Compresses large files (>50MB) automatically
