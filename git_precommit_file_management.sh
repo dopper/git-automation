@@ -9,6 +9,7 @@ check_git_lfs() {
 }
 
 # Parse command line options
+# Think through which combination of parameters are allowed (e.g. BACKUP + REVERT does not make sense)
 BACKUP=false
 STASH=false
 DRY_RUN=false
@@ -61,10 +62,12 @@ if [[ "$REVERT" == "true" ]]; then
     echo "Reverting files from the latest backup in .backup/..."
     if [[ -d ".backup" ]]; then
         # Remove all files in the current directory except .backup, .git, and the script itself
+        # TODO, verify maxdepth is seeing all recursive directories
         find . -mindepth 1 -maxdepth 1 -not -name '.backup' -not -name '.git' -not -name 'git_precommit_file_management.sh' -exec rm -rf {} +
 
         # Recreate directory structure before copying files from .backup/ to the current directory
         # find .backup -type d -exec sh -c 'mkdir -p "${0#.backup/}"' {} \;
+        # TODO probably can do this simpler with using .backup dirs
         find .backup -type d -exec sh -c 'mkdir -p "${1#.backup/}"' _ {} \;
 
         # Copy files from .backup/ to the current directory, preserving directory structure
@@ -133,13 +136,11 @@ process_file() {
     else
         echo "Compressing $file..."
         tar -czvf "$file.tar.gz" -C "$(dirname "$file")" "$(basename "$file")"
-        # rm -rf "$file"
         rm -f "$file"
 
     fi
 
     if [[ -f "$file.tar.gz" ]]; then
-        # file_size=$(stat -f%z "$file.tar.gz")
         file_size=$(wc -c < "$file.tar.gz")
 
 
