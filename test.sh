@@ -12,9 +12,9 @@ cd $TEST_DIR || exit 1
 # Initialize a new git repository
 git init || { echo "ERROR: Git repository initialization failed."; exit 1; }
 
-# Copy the git_precommit_file_management.sh script into the test directory
-cp ../git_precommit_file_management.sh ./
-chmod +x git_precommit_file_management.sh  # Ensure the script is executable
+# Copy the auto-lfs.sh script into the test directory
+cp ../auto-lfs.sh ./
+chmod +x auto-lfs.sh  # Ensure the script is executable
 
 # Install Git LFS if not installed
 if ! git lfs env > /dev/null 2>&1; then
@@ -51,7 +51,7 @@ dd if=/dev/urandom of=nested_files/nested_small_file_1.txt bs=1M count=5  # 5 MB
 
 # Step 3: Test backup functionality
 echo "Running the pre-commit script with backup..."
-./git_precommit_file_management.sh --backup
+./auto-lfs.sh --backup
 
 # Verify the backup was created
 if [[ -d ".backup" ]]; then
@@ -162,7 +162,7 @@ fi
 
 # Step 5: Test dry-run functionality
 echo "Running the pre-commit script in dry-run mode..."
-./git_precommit_file_management.sh --dry-run
+./auto-lfs.sh --dry-run
 
 # Step 6: Test stash functionality
 echo "Modifying files for stash testing..."
@@ -171,7 +171,7 @@ echo "Test modification" >> small_file_1.txt
 
 echo "Running the pre-commit script with stash..."
 git commit --allow-empty -m "Initial commit"
-./git_precommit_file_management.sh --stash
+./auto-lfs.sh --stash
 
 # Verify stash was created
 STASH_RESULT=$(git stash list | grep "Pre-commit backup")
@@ -183,7 +183,7 @@ fi
 
 # Step 7: Test revert functionality
 echo "Running the pre-commit script to revert changes..."
-./git_precommit_file_management.sh --revert
+./auto-lfs.sh --revert
 
 # Verify the revert
 verify_file() {
