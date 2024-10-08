@@ -1,9 +1,5 @@
 # Aider files
 .aider.*
-.aider.ident.cache.v*
-.aider.tags.cache.v*
-.aider.chat.history.md
-.aider.input.history
 
 # Log files
 log.txt
