@@ -1,3 +1,5 @@
+<img src="assets/git-lfs-automation.png" width="300" alt="Git LFS Automation">
+
 # Git Repository Management Tools
 
 This project contains a collection of Bash scripts designed to automate and simplify various Git repository management tasks. Below is an overview of each script and its primary function.
