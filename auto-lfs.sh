@@ -120,7 +120,14 @@ process_file() {
     local file="$1"
 
     if [[ "$file" == *.tar.gz ]]; then
-        echo "$file is already compressed. Skipping..."
+    	echo "$file is already compressed. Checking its size..."
+        local file_size=$(wc -c < "$file")
+        
+        # If the .tar.gz file is over 50MB, add it to LFS
+        if [[ "$file_size" -gt $((50 * 1024 * 1024)) ]]; then
+            echo "$file is over 50MB, ensuring it's in Git LFS..."
+            git lfs track "$file"
+        fi
         return
     fi
 
