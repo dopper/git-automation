@@ -2,9 +2,9 @@
 
 # Function to show usage
 usage() {
-    echo "Usage: $0 [--sync] [--delete-destination] <source_directory> <destination_directory>"
-    echo "  --sync                Perform actual synchronization (default is dry run)"
-    echo "  --delete-destination  Delete files in the destination that are not in the source"
+    echo "Usage: $0 [--sync] [--delete] <source_directory> <destination_directory>"
+    echo "  --sync  	Perform actual synchronization (default is dry run)"
+    echo "  --delete 	Delete files in the destination that are not in the source"
     exit 1
 }
 
@@ -29,7 +29,7 @@ DEST_DIR=""
 while [[ "$1" == --* ]]; do
     case "$1" in
         --sync) DRY_RUN=false ;;
-        --delete-destination) DELETE_IN_DEST=true ;;
+        --delete) DELETE_IN_DEST=true ;;
         *) usage ;;
     esac
     shift

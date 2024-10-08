@@ -23,7 +23,7 @@ run_test_case() {
 
     echo ""
     echo "Sync with Deletion (if applicable):"
-    ./dev-sync.sh --sync --delete-destination "testcase${test_case_number}_source" "testcase${test_case_number}_destination"
+    ./dev-sync.sh --sync --delete "testcase${test_case_number}_source" "testcase${test_case_number}_destination"
     echo "-------------------------------------------"
 }
 
@@ -115,6 +115,7 @@ run_all_test_cases() {
     test_case_4
     test_case_5
     test_case_6
+    cleanup_directories
 }
 
 # Run all test cases
