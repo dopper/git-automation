@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # List of script filenames to copy to /usr/local/bin
-SCRIPTS=("auto-lfs.sh" "git-status.sh" "hts.sh" "repos.sh")  # Modify this list as needed
+SCRIPTS=("auto-lfs.sh" "dfct.sh" "dirc.sh" "git-status.sh" "hts.sh" "repos.sh")  # Modify this list as needed
 
 # Loop through each script in the list
 for script in "${SCRIPTS[@]}"; do
