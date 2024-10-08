@@ -1,79 +1,83 @@
-# Git Pre-Commit File Management Tool
-This tool helps manage large files in Git repositories by automatically compressing them when necessary and tracking them with Git LFS (Large File Storage). It also includes backup and revert functionalities to ensure data safety.
+# Git Repository Management Tools
 
-<img src="assets/git-lfs-automation.png" alt="Project Logo" width="200"/>
+This project contains a collection of Bash scripts designed to automate and simplify various Git repository management tasks. Below is an overview of each script and its primary function.
 
-## Features
-- Compresses large files (>50MB) automatically
-- Tracks large compressed files with Git LFS
-- Creates backups of files before modifications
-- Provides a dry-run mode for testing
-- Allows stashing of changes
-- Supports reverting to the previous state
+## Scripts Overview
 
-## Prerequisites
-- Git
-- Git LFS
-- Bash shell
+### 1. auto-lfs.sh
+- **Function**: Manages large files in Git repositories.
+- **Features**:
+  - Compresses large files (>50MB) automatically
+  - Tracks large compressed files with Git LFS
+  - Creates backups of files before modifications
+  - Provides a dry-run mode for testing
+  - Allows stashing of changes
+  - Supports reverting to the previous state
 
-## Installation
-1. Clone this repository or copy the `git_precommit_file_management.sh` script to your project's root directory.
-2. Make the script executable:
-``` bash
-chmod +x git_precommit_file_management.sh
-```
+### 2. repos.sh
+- **Function**: Lists Git repositories and their remote URLs.
+- **Features**:
+  - Scans subdirectories for Git repositories
+  - Displays the remote origin URL for each repository
+
+### 3. git-status.sh
+- **Function**: Checks the status of multiple Git repositories.
+- **Features**:
+  - Detects uncommitted changes in repositories
+  - Optionally updates repositories (add, commit, push)
+  - Checks if local repositories are up-to-date with remotes
+
+### 4. install-scripts.sh
+- **Function**: Installs the scripts to /usr/local/bin for system-wide access.
+- **Features**:
+  - Copies specified scripts to /usr/local/bin
+  - Makes the scripts executable
+
+### 5. dirc.sh
+- **Function**: Counts files in directories.
+- **Features**:
+  - Loops through all directories in the current location
+  - Counts and displays the number of files in each directory
+
+### 6. dfct.sh
+- **Function**: Analyzes directories for high file counts.
+- **Features**:
+  - Recursively analyzes directories
+  - Identifies directories exceeding a file count threshold
+  - Suggests archiving commands for large directories
+
+### 7. auto-subm.sh
+- **Function**: Automates the process of adding repositories as submodules.
+- **Features**:
+  - Moves child repositories into a parent repository
+  - Adds child repositories as submodules
+  - Updates .gitmodules file and commits changes
+
+### 8. hts.sh
+- **Function**: Converts Git remote URLs from HTTPS to SSH.
+- **Features**:
+  - Checks if the current remote URL uses HTTPS
+  - Converts GitHub HTTPS URLs to SSH format
+  - Updates the remote URL in the Git configuration
 
 ## Usage
-You can run the script manually in different modes:
-- **Default mode** (process files without additional options):
+
+Each script can be run independently. For detailed usage instructions, please refer to the comments within each script or run the script with the `--help` flag if available.
+
+## Installation
+
+To install these scripts system-wide, use the `install-scripts.sh`:
+
 ```bash
-./git_precommit_file_management.sh
+./install-scripts.sh
 ```
 
-- **Backup mode**:
-```bash
-./git_precommit_file_management.sh --backup
-```
-
-- **Stash mode**:
-```bash
-./git_precommit_file_management.sh --stash
-```
-
-- **Dry-run mode**:
-```bash
-./git_precommit_file_management.sh --dry-run
-```
-
-- **Revert mode**:
-```bash
-./git_precommit_file_management.sh --revert
-```
-
-When run without arguments, the script will compress large files and track them with Git LFS as needed.
-## Testing
-A test script `test_precommit_script.sh` is provided to verify the functionality. To run the tests:
-1. Make the test script executable:
-```bash
-chmod +x test_precommit_script.sh
-```
-
-2. Run the test script:
-```bash
-./test_precommit_script.sh
-```
-
-The test script creates a temporary Git repository, adds various types of files, and runs the script with different options to ensure everything works as expected.
-## Customization
-You can modify the `git_precommit_file_management.sh` script to adjust the file size threshold for compression or change the behavior for specific file types or directories.
-
-## Troubleshooting
-- Check the script output for error messages.
-- Ensure Git LFS is properly installed and initialized in your repository.
-- Verify file sizes and locations if files are not being tracked or compressed as expected.
+This will copy the scripts to /usr/local/bin, making them accessible from anywhere in the system.
 
 ## Contributing
-Contributions to improve the script or extend its functionality are welcome. Please submit a pull request or open an issue to discuss proposed changes.
+
+Contributions to improve the scripts or extend their functionality are welcome. Please submit a pull request or open an issue to discuss proposed changes.
 
 ## License
-MIT License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
