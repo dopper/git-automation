@@ -56,10 +56,10 @@ if [[ ! -d "$DEST_DIR" ]]; then
 fi
 
 # Set rsync options
-RSYNC_OPTIONS="-av --checksum"
+RSYNC_OPTIONS="-av --checksum --exclude=.DS_Store"
 
-# Add the delete flag if specified
-if [[ "$DELETE_IN_DEST" == true ]]; then
+# Add the delete flag if specified and not in dry run mode
+if [[ "$DELETE_IN_DEST" == true && "$DRY_RUN" == false ]]; then
     RSYNC_OPTIONS="$RSYNC_OPTIONS --delete"
     echo "Files not present in source will be deleted from destination."
 fi
@@ -74,6 +74,7 @@ fi
 
 # Perform the sync using rsync
 echo "Synchronizing $SOURCE_DIR to $DEST_DIR..."
+echo "Running command: rsync $RSYNC_OPTIONS \"$SOURCE_DIR/\" \"$DEST_DIR/\""
 rsync $RSYNC_OPTIONS "$SOURCE_DIR/" "$DEST_DIR/"
 
 # Display message on completion
