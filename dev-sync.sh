@@ -34,11 +34,11 @@ while [[ "$1" == --* ]]; do
         --delete) DELETE_IN_DEST=true ;;
         --skip) 
             shift
-            SKIP_DIR="$1"
-            if [[ -z "$SKIP_DIR" ]]; then
+            if [[ -z "$1" || "$1" == --* ]]; then
                 echo "ERROR: --skip requires a directory name"
                 usage
             fi
+            SKIP_DIR="$1"
             ;;
         *) usage ;;
     esac
