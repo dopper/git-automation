@@ -45,6 +45,13 @@ while [[ "$1" == --* ]]; do
     shift
 done
 
+# Add debug output
+echo "After parameter parsing:"
+echo "DRY_RUN=$DRY_RUN"
+echo "DELETE_IN_DEST=$DELETE_IN_DEST"
+echo "SKIP_DIR=$SKIP_DIR"
+echo "Remaining args: $@"
+
 # Assign source and destination directories
 SOURCE_DIR="$1"
 DEST_DIR="$2"
