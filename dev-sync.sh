@@ -9,10 +9,6 @@ usage() {
     exit 1
 }
 
-# Check if the correct number of arguments is provided
-if [[ "$#" -lt 2 || "$#" -gt 4 ]]; then
-    usage
-fi
 
 # Check if rsync is installed (should be by default on macOS)
 if ! command -v rsync &> /dev/null; then
