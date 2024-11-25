@@ -2,9 +2,10 @@
 
 # Function to show usage
 usage() {
-    echo "Usage: $0 [--sync] [--delete] <source_directory> <destination_directory>"
+    echo "Usage: $0 [--sync] [--delete] [--skip <directory>] <source_directory> <destination_directory>"
     echo "  --sync  	Perform actual synchronization (default is dry run)"
     echo "  --delete 	Delete files in the destination that are not in the source"
+    echo "  --skip  	Skip specified directory during synchronization"
     exit 1
 }
 
@@ -22,6 +23,7 @@ fi
 # Initialize variables
 DRY_RUN=true
 DELETE_IN_DEST=false
+SKIP_DIR=""
 SOURCE_DIR=""
 DEST_DIR=""
 
@@ -30,6 +32,14 @@ while [[ "$1" == --* ]]; do
     case "$1" in
         --sync) DRY_RUN=false ;;
         --delete) DELETE_IN_DEST=true ;;
+        --skip) 
+            shift
+            SKIP_DIR="$1"
+            if [[ -z "$SKIP_DIR" ]]; then
+                echo "ERROR: --skip requires a directory name"
+                usage
+            fi
+            ;;
         *) usage ;;
     esac
     shift
@@ -57,6 +67,12 @@ fi
 
 # Set rsync options
 RSYNC_OPTIONS="-av --checksum --exclude=.DS_Store"
+
+# Add skip directory to exclude if specified
+if [[ -n "$SKIP_DIR" ]]; then
+    RSYNC_OPTIONS="$RSYNC_OPTIONS --exclude=$SKIP_DIR"
+    echo "Skipping directory: $SKIP_DIR"
+fi
 
 # Add the delete flag if specified and not in dry run mode
 if [[ "$DELETE_IN_DEST" == true && "$DRY_RUN" == false ]]; then
